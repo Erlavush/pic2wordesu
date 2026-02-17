@@ -1,6 +1,6 @@
 /* ============================================
    4 PICS 1 WORD — Classroom Edition
-   BLACK AMOLED + PURE WHITE Theme
+   BLACK AMOLED + PURE WHITE Theme (Enhanced)
    ============================================ */
 
 :root {
@@ -123,6 +123,25 @@ body {
     box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
 }
 
+/* (D) Join error styling + shake animation */
+.join-error {
+    color: var(--accent-red);
+    font-size: 14px;
+    font-weight: 600;
+    margin: -4px 0;
+}
+
+.input-shake {
+    animation: shake 0.4s ease;
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-8px); }
+    50% { transform: translateX(8px); }
+    75% { transform: translateX(-4px); }
+}
+
 .join-form button {
     padding: 16px;
     font-size: 18px;
@@ -227,10 +246,7 @@ body {
 .lb-rank.silver { color: #aaaaaa; }
 .lb-rank.bronze { color: #777777; }
 
-.lb-info {
-    flex: 1;
-    min-width: 0;
-}
+.lb-info { flex: 1; min-width: 0; }
 
 .lb-name {
     font-size: 14px;
@@ -260,8 +276,62 @@ body {
     justify-content: center;
     background: var(--bg-black);
     border-right: 1px solid var(--border-color);
-    gap: 16px;
-    padding: 20px;
+    gap: 12px;
+    padding: 16px 20px;
+    overflow-y: auto;
+}
+
+/* ============================================
+   (C) TIMER — Circular countdown
+   ============================================ */
+.timer-display {
+    position: relative;
+    width: 64px;
+    height: 64px;
+    flex-shrink: 0;
+}
+
+.timer-svg {
+    width: 64px;
+    height: 64px;
+    transform: rotate(-90deg);
+}
+
+.timer-bg {
+    fill: none;
+    stroke: var(--border-light);
+    stroke-width: 4;
+}
+
+.timer-fill {
+    fill: none;
+    stroke: var(--pure-white);
+    stroke-width: 4;
+    stroke-linecap: round;
+    transition: stroke-dashoffset 1s linear, stroke 0.5s;
+}
+
+.timer-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 22px;
+    font-weight: 900;
+    color: var(--pure-white);
+}
+
+.timer-urgent {
+    animation: timerPulse 0.5s ease infinite;
+}
+
+.timer-urgent .timer-text {
+    color: var(--accent-red);
+}
+
+@keyframes timerPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.08); }
 }
 
 .images-container {
@@ -318,7 +388,9 @@ body {
     50% { transform: scale(1.1); }
 }
 
-/* Word hint boxes */
+/* ============================================
+   (B) Word hint + Reveal flip animation
+   ============================================ */
 .word-hint {
     display: flex;
     gap: 6px;
@@ -338,16 +410,87 @@ body {
     font-weight: 900;
     color: var(--text-muted);
     transition: all 0.3s;
+    transform-style: preserve-3d;
+}
+
+.word-box.flip {
+    animation: letterFlip 0.5s ease forwards;
 }
 
 .word-box.revealed {
     background: var(--pure-white);
     color: var(--bg-black);
     border-color: var(--pure-white);
-    box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.25), 0 0 30px rgba(255, 255, 255, 0.1);
 }
 
-/* Admin Controls */
+@keyframes letterFlip {
+    0% { transform: rotateX(0deg) scale(1); }
+    40% { transform: rotateX(90deg) scale(1.1); }
+    60% { transform: rotateX(90deg) scale(1.1); }
+    100% { transform: rotateX(0deg) scale(1); }
+}
+
+/* ============================================
+   (G) Round Summary
+   ============================================ */
+.round-summary {
+    width: 100%;
+    max-width: 460px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-light);
+    border-radius: 12px;
+    padding: 14px 20px;
+    animation: fadeUp 0.4s ease;
+}
+
+.summary-title {
+    font-size: 11px;
+    font-weight: 900;
+    color: var(--text-muted);
+    letter-spacing: 3px;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.round-summary-list {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.summary-entry {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 12px;
+    background: var(--bg-panel);
+    border-radius: 8px;
+    animation: slideIn 0.3s ease both;
+}
+
+.summary-rank {
+    font-size: 18px;
+    width: 30px;
+    text-align: center;
+}
+
+.summary-name {
+    flex: 1;
+    font-weight: 700;
+    font-size: 14px;
+    color: var(--pure-white);
+}
+
+.summary-pts {
+    font-weight: 900;
+    font-size: 16px;
+    color: var(--accent-green);
+}
+
+/* ============================================
+   (F) Admin Controls + Disabled states
+   ============================================ */
 .admin-controls {
     display: flex;
     gap: 10px;
@@ -364,12 +507,18 @@ body {
     border-radius: 8px;
     cursor: pointer;
     color: var(--bg-black);
-    transition: transform 0.1s, box-shadow 0.1s;
+    transition: transform 0.1s, box-shadow 0.1s, opacity 0.3s;
 }
 
-.admin-btn:active {
+.admin-btn:active:not(:disabled) {
     transform: translateY(3px);
     box-shadow: none !important;
+}
+
+.admin-btn:disabled {
+    opacity: 0.25;
+    cursor: not-allowed;
+    transform: none !important;
 }
 
 .btn-green { background: var(--accent-green); box-shadow: 0 4px 0 var(--accent-green-dark); color: var(--bg-black); }
@@ -418,9 +567,7 @@ body {
     font-size: 13px;
 }
 
-.chat-msg.system .msg-name {
-    color: var(--text-muted);
-}
+.chat-msg.system .msg-name { color: var(--text-muted); }
 
 .chat-msg.correct-system {
     color: var(--accent-green);
@@ -430,9 +577,7 @@ body {
     border-left: 3px solid var(--accent-green);
 }
 
-.chat-msg.correct-system .msg-name {
-    color: var(--accent-green);
-}
+.chat-msg.correct-system .msg-name { color: var(--accent-green); }
 
 .chat-msg.reveal-system {
     color: var(--accent-yellow);
@@ -442,9 +587,7 @@ body {
     border-left: 3px solid var(--accent-yellow);
 }
 
-.chat-msg.reveal-system .msg-name {
-    color: var(--accent-yellow);
-}
+.chat-msg.reveal-system .msg-name { color: var(--accent-yellow); }
 
 .chat-msg.correct-guess .msg-name,
 .chat-msg.correct-guess .msg-text {
@@ -489,9 +632,7 @@ body {
     transition: opacity 0.2s;
 }
 
-.chat-input-area button:hover {
-    opacity: 0.9;
-}
+.chat-input-area button:hover { opacity: 0.9; }
 
 /* ============================================
    ROUND BADGE
@@ -573,26 +714,13 @@ body {
 .final-rank:nth-child(3) { animation-delay: 0.3s; border-left: 4px solid #666666; }
 .final-rank:nth-child(n+4) { animation-delay: 0.4s; border-left: 4px solid var(--border-light); }
 
-.final-rank .f-rank {
-    font-size: 24px;
-    font-weight: 900;
-    width: 40px;
-}
+.final-rank .f-rank { font-size: 24px; font-weight: 900; width: 40px; }
+.final-rank .f-name { flex: 1; font-weight: 700; font-size: 18px; text-align: left; color: var(--pure-white); }
+.final-rank .f-score { font-size: 20px; font-weight: 900; color: var(--pure-white); }
 
-.final-rank .f-name {
-    flex: 1;
-    font-weight: 700;
-    font-size: 18px;
-    text-align: left;
-    color: var(--pure-white);
-}
-
-.final-rank .f-score {
-    font-size: 20px;
-    font-weight: 900;
-    color: var(--pure-white);
-}
-
+/* ============================================
+   ANIMATIONS
+   ============================================ */
 @keyframes slideIn {
     from { opacity: 0; transform: translateX(-40px); }
     to { opacity: 1; transform: translateX(0); }
@@ -654,6 +782,18 @@ body {
         justify-content: center;
     }
 
+    .timer-display {
+        width: 48px;
+        height: 48px;
+        position: absolute;
+        top: 8px;
+        right: 8px;
+        z-index: 10;
+    }
+
+    .timer-svg { width: 48px; height: 48px; }
+    .timer-text { font-size: 16px; }
+
     .images-container {
         width: 100%;
         height: 100%;
@@ -670,6 +810,7 @@ body {
     .waiting-icon { font-size: 40px; }
     .admin-controls { display: none; }
     .word-hint { display: none; }
+    .round-summary { display: none; }
 
     .panel-right {
         width: 100%;
@@ -700,15 +841,8 @@ body {
         bottom: 0;
     }
 
-    .chat-input-area input {
-        padding: 10px 12px;
-        font-size: 14px;
-    }
-
-    .chat-input-area button {
-        padding: 10px 14px;
-        font-size: 16px;
-    }
+    .chat-input-area input { padding: 10px 12px; font-size: 14px; }
+    .chat-input-area button { padding: 10px 14px; font-size: 16px; }
 }
 
 /* Scrollbar styling */
