@@ -46,12 +46,12 @@ let timerInterval = null;
 // HELPERS
 // ============================================
 function getPlayerCount() {
-    return Object.values(gameState.players).filter(p => p.name !== 'ADMIN').length;
+    return Object.values(gameState.players).filter(p => !p.isAdmin).length;
 }
 
 function getPlayerList() {
     const list = Object.values(gameState.players)
-        .filter(p => p.name !== 'ADMIN')
+        .filter(p => !p.isAdmin)
         .sort((a, b) => b.score - a.score);
     list.forEach((p, i) => p.rank = i + 1);
     return list;
