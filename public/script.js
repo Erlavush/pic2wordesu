@@ -400,10 +400,8 @@ function animateReveal(word) {
     });
 }
 
-// Also listen for state to detect reveal
-socket.on('game:state', function revealCheck(state) {
-    // This is handled in renderWordHint above
-});
+
+
 
 // ============================================
 // (G) RENDER: Round Summary (who answered + points)
