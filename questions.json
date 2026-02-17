@@ -1,29 +1,32 @@
 [
-    {
-        "word": "FIRE",
-        "images": [
-            "/assets/round1/pic1.jpg",
-            "/assets/round1/pic2.jpg",
-            "/assets/round1/pic3.jpg",
-            "/assets/round1/pic4.jpg"
-        ]
-    },
-    {
-        "word": "OCEAN",
-        "images": [
-            "/assets/round2/pic1.jpg",
-            "/assets/round2/pic2.jpg",
-            "/assets/round2/pic3.jpg",
-            "/assets/round2/pic4.jpg"
-        ]
-    },
-    {
-        "word": "MUSIC",
-        "images": [
-            "/assets/round3/pic1.jpg",
-            "/assets/round3/pic2.jpg",
-            "/assets/round3/pic3.jpg",
-            "/assets/round3/pic4.jpg"
-        ]
-    }
+    { "word": "BIOME", "images": ["/assets/round1/pic1.jpg", "/assets/round1/pic2.jpg", "/assets/round1/pic3.jpg", "/assets/round1/pic4.jpg"] },
+    { "word": "PRECIPITATION", "images": ["/assets/round2/pic1.jpg", "/assets/round2/pic2.jpg", "/assets/round2/pic3.jpg", "/assets/round2/pic4.jpg"] },
+    { "word": "TEMPERATURE", "images": ["/assets/round3/pic1.jpg", "/assets/round3/pic2.jpg", "/assets/round3/pic3.jpg", "/assets/round3/pic4.jpg"] },
+    { "word": "TUNDRA", "images": ["/assets/round4/pic1.jpg", "/assets/round4/pic2.jpg", "/assets/round4/pic3.jpg", "/assets/round4/pic4.jpg"] },
+    { "word": "PERMAFROST", "images": ["/assets/round5/pic1.jpg", "/assets/round5/pic2.jpg", "/assets/round5/pic3.jpg", "/assets/round5/pic4.jpg"] },
+    { "word": "LICHEN", "images": ["/assets/round6/pic1.jpg", "/assets/round6/pic2.jpg", "/assets/round6/pic3.jpg", "/assets/round6/pic4.jpg"] },
+    { "word": "LEMMING", "images": ["/assets/round7/pic1.jpg", "/assets/round7/pic2.jpg", "/assets/round7/pic3.jpg", "/assets/round7/pic4.jpg"] },
+    { "word": "BOREAL", "images": ["/assets/round8/pic1.jpg", "/assets/round8/pic2.jpg", "/assets/round8/pic3.jpg", "/assets/round8/pic4.jpg"] },
+    { "word": "CONIFER", "images": ["/assets/round9/pic1.jpg", "/assets/round9/pic2.jpg", "/assets/round9/pic3.jpg", "/assets/round9/pic4.jpg"] },
+    { "word": "SPRUCE", "images": ["/assets/round10/pic1.jpg", "/assets/round10/pic2.jpg", "/assets/round10/pic3.jpg", "/assets/round10/pic4.jpg"] },
+    { "word": "CARIBOU", "images": ["/assets/round11/pic1.jpg", "/assets/round11/pic2.jpg", "/assets/round11/pic3.jpg", "/assets/round11/pic4.jpg"] },
+    { "word": "HEMLOCK", "images": ["/assets/round12/pic1.jpg", "/assets/round12/pic2.jpg", "/assets/round12/pic3.jpg", "/assets/round12/pic4.jpg"] },
+    { "word": "EPIPHYTE", "images": ["/assets/round13/pic1.jpg", "/assets/round13/pic2.jpg", "/assets/round13/pic3.jpg", "/assets/round13/pic4.jpg"] },
+    { "word": "DECIDUOUS", "images": ["/assets/round14/pic1.jpg", "/assets/round14/pic2.jpg", "/assets/round14/pic3.jpg", "/assets/round14/pic4.jpg"] },
+    { "word": "OAK", "images": ["/assets/round15/pic1.jpg", "/assets/round15/pic2.jpg", "/assets/round15/pic3.jpg", "/assets/round15/pic4.jpg"] },
+    { "word": "BISON", "images": ["/assets/round16/pic1.jpg", "/assets/round16/pic2.jpg", "/assets/round16/pic3.jpg", "/assets/round16/pic4.jpg"] },
+    { "word": "TROPICAL", "images": ["/assets/round17/pic1.jpg", "/assets/round17/pic2.jpg", "/assets/round17/pic3.jpg", "/assets/round17/pic4.jpg"] },
+    { "word": "CANOPY", "images": ["/assets/round18/pic1.jpg", "/assets/round18/pic2.jpg", "/assets/round18/pic3.jpg", "/assets/round18/pic4.jpg"] },
+    { "word": "BROMELAID", "images": ["/assets/round19/pic1.jpg", "/assets/round19/pic2.jpg", "/assets/round19/pic3.jpg", "/assets/round19/pic4.jpg"] },
+    { "word": "SLOTH", "images": ["/assets/round20/pic1.jpg", "/assets/round20/pic2.jpg", "/assets/round20/pic3.jpg", "/assets/round20/pic4.jpg"] },
+    { "word": "CHAPARRAL", "images": ["/assets/round21/pic1.jpg", "/assets/round21/pic2.jpg", "/assets/round21/pic3.jpg", "/assets/round21/pic4.jpg"] },
+    { "word": "PUMA", "images": ["/assets/round22/pic1.jpg", "/assets/round22/pic2.jpg", "/assets/round22/pic3.jpg", "/assets/round22/pic4.jpg"] },
+    { "word": "GRASSLAND", "images": ["/assets/round23/pic1.jpg", "/assets/round23/pic2.jpg", "/assets/round23/pic3.jpg", "/assets/round23/pic4.jpg"] },
+    { "word": "SAVANNA", "images": ["/assets/round24/pic1.jpg", "/assets/round24/pic2.jpg", "/assets/round24/pic3.jpg", "/assets/round24/pic4.jpg"] },
+    { "word": "ACACIA", "images": ["/assets/round25/pic1.jpg", "/assets/round25/pic2.jpg", "/assets/round25/pic3.jpg", "/assets/round25/pic4.jpg"] },
+    { "word": "WILDEBEEST", "images": ["/assets/round26/pic1.jpg", "/assets/round26/pic2.jpg", "/assets/round26/pic3.jpg", "/assets/round26/pic4.jpg"] },
+    { "word": "DESERT", "images": ["/assets/round27/pic1.jpg", "/assets/round27/pic2.jpg", "/assets/round27/pic3.jpg", "/assets/round27/pic4.jpg"] },
+    { "word": "CACTUS", "images": ["/assets/round28/pic1.jpg", "/assets/round28/pic2.jpg", "/assets/round28/pic3.jpg", "/assets/round28/pic4.jpg"] },
+    { "word": "SCORPION", "images": ["/assets/round29/pic1.jpg", "/assets/round29/pic2.jpg", "/assets/round29/pic3.jpg", "/assets/round29/pic4.jpg"] },
+    { "word": "AQUATIC", "images": ["/assets/round30/pic1.jpg", "/assets/round30/pic2.jpg", "/assets/round30/pic3.jpg", "/assets/round30/pic4.jpg"] }
 ]
