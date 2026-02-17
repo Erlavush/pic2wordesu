@@ -260,3 +260,13 @@ function escapeHtml(str) {
     div.textContent = str;
     return div.innerHTML;
 }
+
+// ============================================
+// MOBILE: Fix virtual keyboard resizing
+// ============================================
+if (window.visualViewport) {
+    window.visualViewport.addEventListener('resize', () => {
+        document.documentElement.style.height = window.visualViewport.height + 'px';
+    });
+}
+
