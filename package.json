@@ -1,0 +1,17 @@
+{
+  "name": "pic2wordesu",
+  "version": "1.0.0",
+  "description": "4 Pics 1 Word – Multiplayer Classroom Game",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.21.0",
+    "socket.io": "^4.7.0"
+  }
+}

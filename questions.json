@@ -1,0 +1,29 @@
+[
+    {
+        "word": "FIRE",
+        "images": [
+            "/assets/round1/pic1.jpg",
+            "/assets/round1/pic2.jpg",
+            "/assets/round1/pic3.jpg",
+            "/assets/round1/pic4.jpg"
+        ]
+    },
+    {
+        "word": "OCEAN",
+        "images": [
+            "/assets/round2/pic1.jpg",
+            "/assets/round2/pic2.jpg",
+            "/assets/round2/pic3.jpg",
+            "/assets/round2/pic4.jpg"
+        ]
+    },
+    {
+        "word": "MUSIC",
+        "images": [
+            "/assets/round3/pic1.jpg",
+            "/assets/round3/pic2.jpg",
+            "/assets/round3/pic3.jpg",
+            "/assets/round3/pic4.jpg"
+        ]
+    }
+]
