@@ -352,20 +352,25 @@ function renderWordHint(state) {
         if (!wordHint.classList.contains('hidden')) {
             wordHint.classList.add('hidden');
         }
+        wordHint.dataset.round = '';
         return;
     }
 
     const currentBoxes = wordHint.querySelectorAll('.word-box').length;
-    if (currentBoxes === state.wordLength && !wordHint.classList.contains('hidden')) {
-        // Check if we need to animate reveal
+    const roundChanged = wordHint.dataset.round !== String(state.currentRound);
+
+    if (!roundChanged && currentBoxes === state.wordLength && !wordHint.classList.contains('hidden')) {
+        // Same round, same length — just check if we need to animate reveal
         if (state.revealed && !wordHint.dataset.revealed && state.revealedWord) {
             animateReveal(state.revealedWord);
         }
         return;
     }
 
+    // New round or new word length — rebuild boxes
     wordHint.classList.remove('hidden');
     wordHint.dataset.revealed = '';
+    wordHint.dataset.round = String(state.currentRound);
     wordHint.innerHTML = '';
     for (let i = 0; i < state.wordLength; i++) {
         const box = document.createElement('div');
