@@ -4,13 +4,39 @@ const { Server } = require('socket.io');
 const path = require('path');
 const fs = require('fs');
 const os = require('os');
+const QRCode = require('qrcode');
 
 const app = express();
 const server = http.createServer(app);
 const io = new Server(server);
+const PORT = 3000;
 
 // Serve static files
 app.use(express.static(path.join(__dirname, 'public')));
+
+// QR Code API — returns a data-URL QR image for the game URL
+app.get('/api/qr', async (req, res) => {
+    try {
+        const nets = os.networkInterfaces();
+        let networkUrl = `http://localhost:${PORT}`;
+        for (const name of Object.keys(nets)) {
+            for (const net of nets[name]) {
+                if (net.family === 'IPv4' && !net.internal) {
+                    networkUrl = `http://${net.address}:${PORT}`;
+                    break;
+                }
+            }
+        }
+        const dataUrl = await QRCode.toDataURL(networkUrl, {
+            width: 256,
+            margin: 1,
+            color: { dark: '#000000', light: '#ffffff' },
+        });
+        res.json({ url: networkUrl, qr: dataUrl });
+    } catch (err) {
+        res.status(500).json({ error: 'QR generation failed' });
+    }
+});
 
 // Load questions
 const questions = JSON.parse(
@@ -390,11 +416,10 @@ function getOrdinal(n) {
 // ============================================
 // START SERVER
 // ============================================
-const PORT = 3000;
 server.listen(PORT, '0.0.0.0', () => {
     console.log('');
     console.log('═══════════════════════════════════════════');
-    console.log('  🎮  4 PICS 1 WORD — Classroom Game');
+    console.log('  🎮  pic2wordesu — CS3 Mini Game');
     console.log('═══════════════════════════════════════════');
     console.log(`  Local:    http://localhost:${PORT}`);
 
@@ -408,9 +433,9 @@ server.listen(PORT, '0.0.0.0', () => {
     }
 
     console.log('');
-    console.log('  📱  Students connect to the Network URL');
-    console.log('  💻  Admin: type ADMIN to control the game');
+    console.log('  📱  Students scan the QR code to join');
     console.log(`  ⏱️  Timer: ${TIMER_SECONDS > 0 ? TIMER_SECONDS + 's per round' : 'disabled'}`);
+    console.log(`  📦  ${questions.length} rounds loaded`);
     console.log('═══════════════════════════════════════════');
     console.log('');
 });

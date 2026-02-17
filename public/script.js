@@ -553,3 +553,22 @@ if (window.visualViewport) {
         document.documentElement.style.height = window.visualViewport.height + 'px';
     });
 }
+
+// ============================================
+// QR CODE: Fetch and display on join screen
+// ============================================
+(async function loadQR() {
+    try {
+        const res = await fetch('/api/qr');
+        const data = await res.json();
+        const qrImg = document.getElementById('qr-code');
+        const qrUrl = document.getElementById('qr-url');
+        if (qrImg && data.qr) qrImg.src = data.qr;
+        if (qrUrl && data.url) qrUrl.textContent = data.url;
+    } catch (e) {
+        // QR not critical — hide container if it fails
+        const qrContainer = document.getElementById('qr-container');
+        if (qrContainer) qrContainer.classList.add('hidden');
+    }
+})();
+

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>4 Pics 1 Word</title>
+    <title>pic2wordesu — CS3 Mini Game</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 </head>
@@ -13,18 +13,21 @@
     <div id="join-screen" class="screen active">
         <div class="join-container">
             <div class="join-logo">
-                <span class="logo-4">4</span>
-                <span class="logo-pics">PICS</span>
-                <span class="logo-1">1</span>
-                <span class="logo-word">WORD</span>
+                <span class="logo-pic2word">pic2word</span><span class="logo-esu">esu</span>
             </div>
-            <p class="join-subtitle">Classroom Edition</p>
+            <p class="join-subtitle">CS3 Mini Game</p>
+
+            <!-- QR Code (shown to everyone, updates dynamically) -->
+            <div id="qr-container" class="qr-container">
+                <img id="qr-code" class="qr-code" alt="Scan to join" />
+                <p class="qr-hint" id="qr-url"></p>
+            </div>
+
             <div class="join-form">
                 <input type="text" id="name-input" placeholder="Enter your group name..." maxlength="20" autocomplete="off" />
                 <p id="join-error" class="join-error hidden"></p>
                 <button id="join-btn">JOIN GAME</button>
             </div>
-            <p class="join-hint">Type <strong>ADMIN</strong> to control the game</p>
         </div>
     </div>
 
@@ -57,7 +60,7 @@
                 <div class="images-container" id="images-container">
                     <div class="waiting-state" id="waiting-state">
                         <div class="waiting-icon">🎮</div>
-                        <p>Waiting for admin to start...</p>
+                        <p>Waiting for the game to start...</p>
                     </div>
                 </div>
 

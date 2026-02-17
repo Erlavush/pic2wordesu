@@ -1,5 +1,5 @@
 /* ============================================
-   4 PICS 1 WORD — Classroom Edition
+   pic2wordesu — CS3 Mini Game
    BLACK AMOLED + PURE WHITE Theme (Enhanced)
    ============================================ */
 
@@ -67,34 +67,61 @@ body {
 
 .join-logo {
     display: flex;
-    align-items: center;
+    align-items: baseline;
     justify-content: center;
-    gap: 10px;
-    margin-bottom: 10px;
+    gap: 0;
+    margin-bottom: 8px;
 }
 
-.logo-4, .logo-1 {
-    font-size: 72px;
+.logo-pic2word {
+    font-size: 56px;
     font-weight: 900;
     color: var(--pure-white);
     text-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
     line-height: 1;
+    letter-spacing: -2px;
 }
 
-.logo-pics, .logo-word {
-    font-size: 42px;
+.logo-esu {
+    font-size: 56px;
     font-weight: 900;
-    color: var(--pure-white);
-    text-shadow: 0 0 20px rgba(255, 255, 255, 0.15);
+    background: linear-gradient(135deg, #00e676, #448aff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1;
+    letter-spacing: -2px;
 }
 
 .join-subtitle {
     font-size: 14px;
     color: var(--text-muted);
-    margin-bottom: 40px;
+    margin-bottom: 24px;
     font-weight: 600;
     letter-spacing: 4px;
     text-transform: uppercase;
+}
+
+/* QR Code */
+.qr-container {
+    margin-bottom: 28px;
+}
+
+.qr-code {
+    width: 160px;
+    height: 160px;
+    border-radius: 12px;
+    border: 2px solid var(--border-light);
+    background: #fff;
+    padding: 8px;
+}
+
+.qr-hint {
+    margin-top: 8px;
+    font-size: 12px;
+    color: var(--text-muted);
+    font-family: 'Inter', monospace;
+    letter-spacing: 1px;
 }
 
 .join-form {
@@ -162,11 +189,7 @@ body {
     box-shadow: none;
 }
 
-.join-hint {
-    margin-top: 20px;
-    font-size: 13px;
-    color: var(--text-muted);
-}
+/* join-hint removed — no ADMIN hint shown */
 
 .join-hint strong {
     color: var(--pure-white);
