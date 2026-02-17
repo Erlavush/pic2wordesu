@@ -7,6 +7,9 @@ const socket = io();
 // ---- State ----
 let myName = '';
 let isAdmin = false;
+let lastState = null;          // Track previous state to diff
+let lastChatCount = 0;         // Track how many messages we've rendered
+let currentImagesKey = '';     // Track which images are showing
 
 // ---- DOM ----
 const joinScreen = document.getElementById('join-screen');
@@ -16,7 +19,6 @@ const joinBtn = document.getElementById('join-btn');
 const roundBadge = document.getElementById('round-badge');
 const leaderboard = document.getElementById('leaderboard');
 const imagesContainer = document.getElementById('images-container');
-const waitingState = document.getElementById('waiting-state');
 const adminControls = document.getElementById('admin-controls');
 const wordHint = document.getElementById('word-hint');
 const chatMessages = document.getElementById('chat-messages');
@@ -56,19 +58,19 @@ socket.on('joined', (data) => {
     // Show/hide admin controls
     if (isAdmin) {
         adminControls.classList.remove('hidden');
-        chatInputArea.classList.add('hidden'); // admin doesn't chat
+        chatInputArea.classList.add('hidden');
     }
 });
 
 // ============================================
-// GAME STATE UPDATES
+// GAME STATE UPDATES (incremental)
 // ============================================
 socket.on('game:state', (state) => {
     renderRoundBadge(state);
-    renderLeaderboard(state.players);
+    renderLeaderboard(state);
     renderImages(state);
     renderWordHint(state);
-    renderChat(state.chatMessages);
+    renderChatIncremental(state.chatMessages);
 
     // Game over
     if (state.phase === 'finished') {
@@ -76,90 +78,153 @@ socket.on('game:state', (state) => {
     } else {
         gameoverOverlay.classList.add('hidden');
     }
+
+    lastState = state;
 });
 
 // ============================================
 // RENDER: Round Badge
 // ============================================
 function renderRoundBadge(state) {
+    let text;
     if (state.phase === 'lobby') {
-        roundBadge.textContent = 'LOBBY';
+        text = 'LOBBY';
     } else if (state.phase === 'finished') {
-        roundBadge.textContent = 'FINISHED';
+        text = 'FINISHED';
     } else {
-        roundBadge.textContent = `ROUND ${state.currentRound} / ${state.totalRounds}`;
+        text = `ROUND ${state.currentRound} / ${state.totalRounds}`;
+    }
+
+    if (roundBadge.textContent !== text) {
+        roundBadge.textContent = text;
     }
 }
 
 // ============================================
-// RENDER: Leaderboard
+// RENDER: Leaderboard (only update changed entries)
 // ============================================
-function renderLeaderboard(players) {
-    leaderboard.innerHTML = '';
+function renderLeaderboard(state) {
+    const players = state.players;
+    const entries = leaderboard.querySelectorAll('.lb-entry');
 
+    // Rebuild only if player count changed
+    if (entries.length !== players.length) {
+        leaderboard.innerHTML = '';
+        players.forEach((p, i) => {
+            leaderboard.appendChild(createLeaderboardEntry(p, i));
+        });
+        return;
+    }
+
+    // Otherwise, update in-place
     players.forEach((p, i) => {
-        const entry = document.createElement('div');
-        entry.className = 'lb-entry';
+        const entry = entries[i];
+        const rankEl = entry.querySelector('.lb-rank');
+        const nameEl = entry.querySelector('.lb-name');
+        const scoreEl = entry.querySelector('.lb-score');
+        const pointsEl = entry.querySelector('.lb-points');
 
         const rankClass = i === 0 ? 'gold' : i === 1 ? 'silver' : i === 2 ? 'bronze' : '';
 
-        entry.innerHTML = `
-            <div class="lb-rank ${rankClass}">#${i + 1}</div>
-            <div class="lb-info">
-                <div class="lb-name">${escapeHtml(p.name)}</div>
-                <div class="lb-score">Points: ${p.score}</div>
-            </div>
-            <div class="lb-points">${p.score}</div>
-        `;
+        // Update rank
+        const newRankText = `#${i + 1}`;
+        if (rankEl.textContent !== newRankText) {
+            rankEl.textContent = newRankText;
+            rankEl.className = `lb-rank ${rankClass}`;
+        }
 
-        leaderboard.appendChild(entry);
+        // Update name
+        const safeName = escapeHtml(p.name);
+        if (nameEl.innerHTML !== safeName) {
+            nameEl.innerHTML = safeName;
+        }
+
+        // Update score (animate if changed)
+        const newScoreText = `Points: ${p.score}`;
+        if (scoreEl.textContent !== newScoreText) {
+            scoreEl.textContent = newScoreText;
+            pointsEl.textContent = p.score;
+            entry.classList.add('highlight');
+            setTimeout(() => entry.classList.remove('highlight'), 600);
+        }
     });
 }
 
+function createLeaderboardEntry(p, i) {
+    const entry = document.createElement('div');
+    entry.className = 'lb-entry';
+    const rankClass = i === 0 ? 'gold' : i === 1 ? 'silver' : i === 2 ? 'bronze' : '';
+    entry.innerHTML = `
+        <div class="lb-rank ${rankClass}">#${i + 1}</div>
+        <div class="lb-info">
+            <div class="lb-name">${escapeHtml(p.name)}</div>
+            <div class="lb-score">Points: ${p.score}</div>
+        </div>
+        <div class="lb-points">${p.score}</div>
+    `;
+    return entry;
+}
+
 // ============================================
-// RENDER: Images
+// RENDER: Images (only re-render if changed)
 // ============================================
 function renderImages(state) {
+    // Build a key to identify what should be shown
+    let newKey;
     if (state.phase === 'lobby' || state.images.length === 0) {
+        newKey = 'waiting';
+    } else if (state.phase === 'finished') {
+        newKey = 'finished';
+    } else {
+        newKey = 'round-' + state.currentRound;
+    }
+
+    // Skip if already showing this
+    if (newKey === currentImagesKey) return;
+    currentImagesKey = newKey;
+
+    if (newKey === 'waiting') {
         imagesContainer.innerHTML = `
             <div class="waiting-state">
                 <div class="waiting-icon">🎮</div>
                 <p>Waiting for admin to start...</p>
             </div>
         `;
-        return;
-    }
-
-    if (state.phase === 'finished') {
+    } else if (newKey === 'finished') {
         imagesContainer.innerHTML = `
             <div class="waiting-state">
                 <div class="waiting-icon">🏆</div>
                 <p>Game finished!</p>
             </div>
         `;
-        return;
+    } else {
+        imagesContainer.innerHTML = state.images.map((src, i) => `
+            <div class="image-cell">
+                <img src="${src}" alt="Pic ${i + 1}" onerror="this.style.display='none'; this.parentElement.innerHTML='<div style=\\'display:flex;align-items:center;justify-content:center;height:100%;color:#556b7d;font-size:14px;\\'>Image ${i + 1}</div>'">
+            </div>
+        `).join('');
     }
-
-    // Show 4 images
-    imagesContainer.innerHTML = state.images.map((src, i) => `
-        <div class="image-cell">
-            <img src="${src}" alt="Pic ${i + 1}" onerror="this.style.display='none'; this.parentElement.innerHTML='<div style=\\'display:flex;align-items:center;justify-content:center;height:100%;color:#556b7d;font-size:14px;\\'>Image ${i + 1}</div>'">
-        </div>
-    `).join('');
 }
 
 // ============================================
-// RENDER: Word Hint (blank boxes)
+// RENDER: Word Hint (only if changed)
 // ============================================
 function renderWordHint(state) {
     if (state.phase !== 'playing' || state.wordLength === 0) {
-        wordHint.classList.add('hidden');
+        if (!wordHint.classList.contains('hidden')) {
+            wordHint.classList.add('hidden');
+        }
+        return;
+    }
+
+    // Only rebuild if word length changed
+    const currentBoxes = wordHint.querySelectorAll('.word-box').length;
+    if (currentBoxes === state.wordLength && !wordHint.classList.contains('hidden')) {
         return;
     }
 
     wordHint.classList.remove('hidden');
     wordHint.innerHTML = '';
-
     for (let i = 0; i < state.wordLength; i++) {
         const box = document.createElement('div');
         box.className = 'word-box';
@@ -169,12 +234,19 @@ function renderWordHint(state) {
 }
 
 // ============================================
-// RENDER: Chat
+// RENDER: Chat (INCREMENTAL — only append new)
 // ============================================
-function renderChat(messages) {
-    chatMessages.innerHTML = '';
+function renderChatIncremental(messages) {
+    // If we have fewer messages than before (reset happened), rebuild
+    if (messages.length < lastChatCount) {
+        chatMessages.innerHTML = '';
+        lastChatCount = 0;
+    }
 
-    messages.forEach(msg => {
+    // Only append new messages
+    const newMessages = messages.slice(lastChatCount);
+
+    newMessages.forEach(msg => {
         const div = document.createElement('div');
         div.className = 'chat-msg';
 
@@ -196,6 +268,8 @@ function renderChat(messages) {
 
         chatMessages.appendChild(div);
     });
+
+    lastChatCount = messages.length;
 
     // Auto-scroll to bottom
     chatMessages.scrollTop = chatMessages.scrollHeight;
@@ -226,6 +300,9 @@ btnReveal.addEventListener('click', () => socket.emit('admin:reveal'));
 btnReset.addEventListener('click', () => {
     if (confirm('Reset the entire game? All scores will be cleared.')) {
         socket.emit('admin:reset');
+        // Reset client tracking
+        lastChatCount = 0;
+        currentImagesKey = '';
     }
 });
 
@@ -269,4 +346,3 @@ if (window.visualViewport) {
         document.documentElement.style.height = window.visualViewport.height + 'px';
     });
 }
-
