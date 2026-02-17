@@ -134,6 +134,7 @@ function broadcastState() {
         images: question && gameState.phase === 'playing' ? question.images : [],
         word: null,
         wordLength: question ? question.word.length : 0,
+        revealedWord: gameState.revealed && question ? question.word : null,
         chatMessages: gameState.chatMessages.slice(-100),
         timer: gameState.timer,
         revealed: gameState.revealed,

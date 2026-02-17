@@ -358,8 +358,8 @@ function renderWordHint(state) {
     const currentBoxes = wordHint.querySelectorAll('.word-box').length;
     if (currentBoxes === state.wordLength && !wordHint.classList.contains('hidden')) {
         // Check if we need to animate reveal
-        if (state.revealed && !wordHint.dataset.revealed) {
-            animateReveal();
+        if (state.revealed && !wordHint.dataset.revealed && state.revealedWord) {
+            animateReveal(state.revealedWord);
         }
         return;
     }
@@ -375,24 +375,13 @@ function renderWordHint(state) {
     }
 
     // If state is already revealed on first render (late joiner), show immediately
-    if (state.revealed) {
-        animateReveal();
+    if (state.revealed && state.revealedWord) {
+        animateReveal(state.revealedWord);
     }
 }
 
-function animateReveal() {
+function animateReveal(word) {
     wordHint.dataset.revealed = 'true';
-    const question = lastState; // We don't have the actual word, but we use chatMessages to find it
-
-    // Find the reveal message to extract the word
-    let word = '';
-    if (lastState && lastState.chatMessages) {
-        const revealMsg = [...lastState.chatMessages].reverse().find(m => m.reveal);
-        if (revealMsg) {
-            const match = revealMsg.text.match(/answer was: (.+)/i);
-            if (match) word = match[1].trim();
-        }
-    }
 
     const boxes = wordHint.querySelectorAll('.word-box');
     boxes.forEach((box, i) => {
