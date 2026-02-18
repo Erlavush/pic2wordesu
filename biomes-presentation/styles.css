@@ -1,0 +1,466 @@
+/* ========================================
+   SCRAPBOOK STYLES
+   Paper textures, washi tape, polaroids
+   ======================================== */
+
+/* --- Canvas Texture Background --- */
+:root {
+  --bg-texture: url('https://www.transparenttextures.com/patterns/canvas-orange.png');
+}
+
+html { scroll-behavior: smooth; }
+
+/* --- Intro Title (white on dark green) --- */
+.intro-title {
+  color: #d1fae5;
+  text-shadow: 2px 4px 12px rgba(0,0,0,0.4), 0 0 40px rgba(16,185,129,0.2);
+}
+.dark .intro-title {
+  color: #a7f3d0;
+}
+
+/* --- Per-Biome Section Backgrounds --- */
+.bg-intro {
+  background-color: #1a3c34;
+  background-image: radial-gradient(circle at 20% 30%, rgba(255,255,255,0.08) 0%, transparent 40%),
+    radial-gradient(circle at 80% 70%, rgba(100,200,150,0.1) 0%, transparent 40%), var(--bg-texture);
+}
+.bg-tundra {
+  background-color: #d1d9e0;
+  background-image: radial-gradient(circle at 20% 30%, rgba(255,255,255,0.4) 0%, transparent 40%),
+    radial-gradient(circle at 80% 70%, rgba(100,149,237,0.1) 0%, transparent 40%), var(--bg-texture);
+}
+.bg-boreal {
+  background-color: #1a3a2a;
+  background-image: radial-gradient(circle at 30% 20%, rgba(100,200,100,0.1) 0%, transparent 40%), var(--bg-texture);
+}
+.bg-temprain {
+  background-color: #0f3a30;
+  background-image: radial-gradient(circle at 20% 40%, rgba(100,220,200,0.08) 0%, transparent 40%), var(--bg-texture);
+}
+.bg-deciduous {
+  background-color: #f5e6d0;
+  background-image: radial-gradient(circle at 70% 30%, rgba(255,180,60,0.15) 0%, transparent 40%), var(--bg-texture);
+}
+.bg-tropical {
+  background-color: #e8f5e9;
+  background-image: radial-gradient(circle at 30% 50%, rgba(100,200,100,0.15) 0%, transparent 40%), var(--bg-texture);
+}
+.bg-chaparral {
+  background-color: #e8d5b8;
+  background-image: radial-gradient(circle at 60% 30%, rgba(200,150,80,0.12) 0%, transparent 40%), var(--bg-texture);
+}
+.bg-grassland {
+  background-color: #e8e4b8;
+  background-image: radial-gradient(circle at 40% 60%, rgba(180,200,50,0.1) 0%, transparent 40%), var(--bg-texture);
+}
+.bg-savanna {
+  background-color: #f0d0a0;
+  background-image: radial-gradient(circle at 50% 30%, rgba(255,150,50,0.15) 0%, transparent 40%), var(--bg-texture);
+}
+.bg-desert {
+  background-color: #f5e0b0;
+  background-image: radial-gradient(circle at 70% 40%, rgba(255,200,50,0.15) 0%, transparent 40%), var(--bg-texture);
+}
+.bg-end {
+  background-color: #1a1a3a;
+  background-image: radial-gradient(circle at 50% 50%, rgba(100,100,200,0.1) 0%, transparent 50%), var(--bg-texture);
+}
+
+/* Dark mode overrides */
+.dark .bg-tundra { background-color: #1a2a3a; }
+.dark .bg-deciduous { background-color: #2a1a0a; }
+.dark .bg-tropical { background-color: #0a2a0a; }
+.dark .bg-chaparral { background-color: #2a1a0a; }
+.dark .bg-grassland { background-color: #1a1a0a; }
+.dark .bg-savanna { background-color: #2a1500; }
+.dark .bg-desert { background-color: #2a1a00; }
+
+/* --- Washi Tape --- */
+.washi {
+  position: absolute;
+  height: 2.5rem;
+  width: 8rem;
+  z-index: 20;
+  opacity: 0.7;
+  mix-blend-mode: multiply;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+  pointer-events: none;
+}
+
+/* --- Clear Tape --- */
+.clear-tape {
+  position: absolute;
+  height: 2rem;
+  width: 6rem;
+  z-index: 20;
+  background: rgba(255,255,255,0.3);
+  backdrop-filter: blur(1px);
+  transform: rotate(12deg);
+  box-shadow: inset 0 0 4px rgba(255,255,255,0.5);
+  border: 1px solid rgba(255,255,255,0.2);
+  pointer-events: none;
+}
+
+/* --- Polaroid Photo Frame --- */
+.polaroid {
+  background: white;
+  padding: 0.5rem;
+  padding-bottom: 3rem;
+  box-shadow: 4px 8px 16px rgba(0,0,0,0.2);
+  position: relative;
+}
+.dark .polaroid { background: #334155; }
+
+.polaroid img {
+  width: 100%;
+  display: block;
+  background: #e2e8f0;
+  min-height: 100px;
+}
+
+/* --- Shadow Heavy (drop shadow) --- */
+.shadow-heavy {
+  filter: drop-shadow(4px 8px 12px rgba(0,0,0,0.25));
+}
+
+/* --- Paper Texture Cards --- */
+.card-note {
+  background: #e2e8f0;
+  padding: 2rem;
+  box-shadow: 4px 8px 12px rgba(0,0,0,0.15);
+  position: relative;
+}
+.dark .card-note { background: #1e293b; }
+
+.card-grid {
+  background: white;
+  padding: 2rem;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+  border: 1px solid #e2e8f0;
+  position: relative;
+  background-image: radial-gradient(#cbd5e1 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+.dark .card-grid {
+  background-color: #1e293b;
+  background-image: radial-gradient(#475569 1px, transparent 1px);
+  border-color: #334155;
+}
+
+.card-notebook {
+  background: #fff9e6;
+  padding: 2rem;
+  box-shadow: 4px 8px 12px rgba(0,0,0,0.15);
+  position: relative;
+  background-image: linear-gradient(#94a3b8 1px, transparent 1px);
+  background-size: 100% 24px;
+  padding-top: 24px;
+}
+.dark .card-notebook {
+  background-color: #1e293b;
+  background-image: linear-gradient(#334155 1px, transparent 1px);
+}
+
+/* --- Torn Cardstock --- */
+.torn-card {
+  background: #e2e8f0;
+  padding: 1.5rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  clip-path: polygon(1% 2%, 98% 0%, 100% 4%, 99% 96%, 97% 100%, 3% 98%, 0% 95%, 2% 50%);
+}
+.dark .torn-card { background: #334155; }
+
+/* --- Fauna Rows --- */
+.fauna-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.fauna-img {
+  width: 5rem;
+  height: 5rem;
+  background: white;
+  padding: 0.25rem;
+  flex-shrink: 0;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  transition: transform 0.3s ease;
+}
+.dark .fauna-img { background: #475569; }
+
+.fauna-img:hover { transform: rotate(0deg) !important; }
+
+.fauna-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  background: #e2e8f0;
+}
+
+/* --- Fauna Card (big pinned polaroid) --- */
+.fauna-card {
+  background: white;
+  padding: 0.6rem;
+  box-shadow: 4px 8px 18px rgba(0,0,0,0.22);
+  position: relative;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  z-index: 1;
+}
+.dark .fauna-card { background: #334155; }
+.fauna-card:hover {
+  transform: rotate(0deg) scale(1.04) !important;
+  box-shadow: 6px 14px 28px rgba(0,0,0,0.3);
+  z-index: 10;
+}
+.fauna-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  display: block;
+  background: #e2e8f0;
+}
+.fauna-card .pin {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background: #ef4444;
+  border-radius: 50%;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.4);
+  z-index: 5;
+}
+@media (min-width: 768px) {
+  .fauna-card img { height: 200px; }
+}
+
+/* --- Doodle Icons --- */
+.doodle {
+  pointer-events: none;
+  user-select: none;
+  opacity: 0.25;
+}
+.dark .doodle { opacity: 0.12; }
+
+/* --- Material Symbols --- */
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+}
+
+/* --- Side Navigation --- */
+.nav-dot {
+  width: 2.25rem;
+  height: 2.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  font-size: 1rem;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+.nav-dot:hover {
+  background: rgba(0,0,0,0.08);
+  transform: scale(1.2);
+}
+.nav-dot.active {
+  background: rgba(0,0,0,0.12);
+  transform: scale(1.15);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+/* --- Scroll Animations --- */
+.anim {
+  opacity: 0;
+  transition: opacity 0.7s cubic-bezier(0.4,0,0.2,1), transform 0.7s cubic-bezier(0.4,0,0.2,1);
+}
+.anim[data-a="fu"] { transform: translateY(40px); }
+.anim[data-a="fd"] { transform: translateY(-30px); }
+.anim[data-a="fl"] { transform: translateX(-50px); }
+.anim[data-a="fr"] { transform: translateX(50px); }
+.anim.visible {
+  opacity: 1;
+  transform: translateY(0) translateX(0);
+}
+
+/* --- Broken Image Fallback --- */
+img {
+  transition: filter 0.5s ease;
+}
+img[data-failed="true"] {
+  display: none;
+}
+
+/* --- Responsive --- */
+@media (max-width: 768px) {
+  .nav-dot { width: 1.75rem; height: 1.75rem; font-size: 0.85rem; }
+  .fauna-img { width: 3.5rem; height: 3.5rem; }
+}
+
+/* ========================================
+   PARTICLE ANIMATIONS
+   ======================================== */
+.particles {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+.biome-sec > *:not(.particles):not(.gradient-fade) { position: relative; z-index: 1; }
+.particle { position: absolute; pointer-events: none; }
+
+/* Snow */
+.snow {
+  background: white;
+  border-radius: 50%;
+  opacity: 0;
+  animation: snowfall linear infinite;
+}
+@keyframes snowfall {
+  0%   { transform: translateY(-10px) translateX(0); opacity: 0; }
+  5%   { opacity: 0.8; }
+  95%  { opacity: 0.6; }
+  100% { transform: translateY(calc(100vh + 20px)) translateX(40px); opacity: 0; }
+}
+
+/* Leaves */
+.leaf {
+  border-radius: 0 50% 0 50%;
+  opacity: 0;
+  animation: leaffall linear infinite;
+}
+@keyframes leaffall {
+  0%   { transform: translateY(-20px) rotate(0deg) translateX(0); opacity: 0; }
+  5%   { opacity: 0.75; }
+  50%  { transform: translateY(50vh) rotate(360deg) translateX(60px); }
+  95%  { opacity: 0.5; }
+  100% { transform: translateY(calc(100vh + 20px)) rotate(720deg) translateX(-20px); opacity: 0; }
+}
+
+/* Rain */
+.raindrop {
+  background: rgba(200,220,255,0.35);
+  border-radius: 0 0 50% 50%;
+  opacity: 0;
+  animation: rainfall linear infinite;
+}
+@keyframes rainfall {
+  0%   { transform: translateY(-20px); opacity: 0; }
+  3%   { opacity: 0.5; }
+  97%  { opacity: 0.3; }
+  100% { transform: translateY(calc(100vh + 20px)); opacity: 0; }
+}
+
+/* Embers */
+.ember {
+  background: #f97316;
+  border-radius: 50%;
+  opacity: 0;
+  animation: emberfloat linear infinite;
+}
+@keyframes emberfloat {
+  0%   { transform: translateY(0) translateX(0); opacity: 0; }
+  10%  { opacity: 0.8; }
+  50%  { transform: translateY(-40vh) translateX(30px); opacity: 0.6; }
+  90%  { opacity: 0.2; }
+  100% { transform: translateY(-80vh) translateX(-20px); opacity: 0; }
+}
+
+/* Fireflies */
+.firefly {
+  background: #fde047;
+  border-radius: 50%;
+  opacity: 0;
+  animation: fireflyGlow ease-in-out infinite;
+  box-shadow: 0 0 6px 2px rgba(253,224,71,0.4);
+}
+@keyframes fireflyGlow {
+  0%   { transform: translate(0, 0); opacity: 0; }
+  15%  { opacity: 0.9; }
+  30%  { opacity: 0.2; }
+  45%  { opacity: 0.8; transform: translate(30px, -25px); }
+  60%  { opacity: 0.1; }
+  75%  { opacity: 0.7; transform: translate(-20px, -40px); }
+  90%  { opacity: 0.2; }
+  100% { transform: translate(10px, -10px); opacity: 0; }
+}
+
+/* Dust / Sand */
+.dust {
+  background: rgba(200,180,140,0.6);
+  border-radius: 50%;
+  opacity: 0;
+  animation: dustdrift linear infinite;
+}
+@keyframes dustdrift {
+  0%   { transform: translate(0, 0); opacity: 0; }
+  10%  { opacity: 0.5; }
+  50%  { transform: translate(60px, -20px); opacity: 0.3; }
+  90%  { opacity: 0.15; }
+  100% { transform: translate(120px, 10px); opacity: 0; }
+}
+
+/* Seeds / Dandelion puffs */
+.seed {
+  background: rgba(255,255,255,0.7);
+  border-radius: 50%;
+  opacity: 0;
+  animation: seedfloat ease-in-out infinite;
+}
+@keyframes seedfloat {
+  0%   { transform: translateY(0) translateX(0); opacity: 0; }
+  10%  { opacity: 0.6; }
+  50%  { transform: translateY(-30vh) translateX(50px); opacity: 0.4; }
+  90%  { opacity: 0.15; }
+  100% { transform: translateY(-60vh) translateX(-10px); opacity: 0; }
+}
+
+/* Pine needles for boreal */
+.pine {
+  background: #2d5a27;
+  border-radius: 1px;
+  opacity: 0;
+  animation: pinefall linear infinite;
+}
+@keyframes pinefall {
+  0%   { transform: translateY(-10px) rotate(0deg); opacity: 0; }
+  5%   { opacity: 0.6; }
+  95%  { opacity: 0.3; }
+  100% { transform: translateY(calc(100vh + 20px)) rotate(540deg); opacity: 0; }
+}
+
+/* ========================================
+   GRADIENT TRANSITIONS BETWEEN SECTIONS
+   ======================================== */
+.gradient-fade {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 180px;
+  pointer-events: none;
+  z-index: 0;
+}
+.bg-intro .gradient-fade    { background: linear-gradient(to bottom, transparent, #d1d9e0); }
+.bg-tundra .gradient-fade   { background: linear-gradient(to bottom, transparent, #1a3a2a); }
+.bg-boreal .gradient-fade   { background: linear-gradient(to bottom, transparent, #0f3a30); }
+.bg-temprain .gradient-fade { background: linear-gradient(to bottom, transparent, #f5e6d0); }
+.bg-deciduous .gradient-fade{ background: linear-gradient(to bottom, transparent, #e8f5e9); }
+.bg-tropical .gradient-fade { background: linear-gradient(to bottom, transparent, #e8d5b8); }
+.bg-chaparral .gradient-fade{ background: linear-gradient(to bottom, transparent, #e8e4b8); }
+.bg-grassland .gradient-fade{ background: linear-gradient(to bottom, transparent, #f0d0a0); }
+.bg-savanna .gradient-fade  { background: linear-gradient(to bottom, transparent, #f5e0b0); }
+.bg-desert .gradient-fade   { background: linear-gradient(to bottom, transparent, #1a1a3a); }
+
+/* Dark mode gradient overrides */
+.dark .bg-intro .gradient-fade    { background: linear-gradient(to bottom, transparent, #1a2a3a); }
+.dark .bg-tundra .gradient-fade   { background: linear-gradient(to bottom, transparent, #1a3a2a); }
+.dark .bg-temprain .gradient-fade { background: linear-gradient(to bottom, transparent, #2a1a0a); }
+.dark .bg-deciduous .gradient-fade{ background: linear-gradient(to bottom, transparent, #0a2a0a); }
+.dark .bg-tropical .gradient-fade { background: linear-gradient(to bottom, transparent, #2a1a0a); }
+.dark .bg-chaparral .gradient-fade{ background: linear-gradient(to bottom, transparent, #1a1a0a); }
+.dark .bg-grassland .gradient-fade{ background: linear-gradient(to bottom, transparent, #2a1500); }
+.dark .bg-savanna .gradient-fade  { background: linear-gradient(to bottom, transparent, #2a1a00); }
+.dark .bg-desert .gradient-fade   { background: linear-gradient(to bottom, transparent, #1a1a3a); }
+

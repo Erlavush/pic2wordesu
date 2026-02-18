@@ -299,8 +299,8 @@ body {
     justify-content: center;
     background: var(--bg-black);
     border-right: 1px solid var(--border-color);
-    gap: 12px;
-    padding: 16px 20px;
+    gap: 8px;
+    padding: 8px 16px;
     overflow-y: auto;
 }
 
@@ -309,14 +309,14 @@ body {
    ============================================ */
 .timer-display {
     position: relative;
-    width: 64px;
-    height: 64px;
+    width: 48px;
+    height: 48px;
     flex-shrink: 0;
 }
 
 .timer-svg {
-    width: 64px;
-    height: 64px;
+    width: 48px;
+    height: 48px;
     transform: rotate(-90deg);
 }
 
@@ -339,7 +339,7 @@ body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    font-size: 22px;
+    font-size: 18px;
     font-weight: 900;
     color: var(--pure-white);
 }
@@ -516,20 +516,21 @@ body {
    ============================================ */
 .admin-controls {
     display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
+    gap: 6px;
+    flex-wrap: nowrap;
     justify-content: center;
 }
 
 .admin-btn {
-    padding: 12px 20px;
-    font-size: 14px;
+    padding: 10px 16px;
+    font-size: 13px;
     font-weight: 700;
     font-family: 'Inter', sans-serif;
     border: none;
     border-radius: 8px;
     cursor: pointer;
     color: var(--bg-black);
+    white-space: nowrap;
     transition: transform 0.1s, box-shadow 0.1s, opacity 0.3s;
 }
 
